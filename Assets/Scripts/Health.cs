@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Health : MonoBehaviour {
     [SerializeField] private float health = 100;
+    [SerializeField] private GameObject deathEffect;
+    [SerializeField] private Vector2 offset;
 
     public void AddToHealth(float amount) {
         health -= amount;
@@ -13,8 +13,12 @@ public class Health : MonoBehaviour {
     }
 
     private void Die() {
-        gameObject.SetActive(false);
-        Destroy(gameObject);
+        if(deathEffect) {
+            Instantiate(deathEffect, (Vector2)transform.position + offset, Quaternion.identity);
+        }
+
+        GameObject o;
+        (o = gameObject).SetActive(false);
+        Destroy(o);
     }
 }
-

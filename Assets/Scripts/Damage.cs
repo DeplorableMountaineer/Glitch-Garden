@@ -7,12 +7,16 @@ public class Damage : MonoBehaviour {
     [SerializeField] private float amount = 50;
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("Trigger");
         Health h = other.gameObject.GetComponent<Health>();
-        if(h && other.gameObject.GetComponent<Attacker>()) {
-            h.AddToHealth(amount);
-            gameObject.SetActive(false);
-            Destroy(gameObject);
+        Attacker attacker = other.gameObject.GetComponent<Attacker>();
+        if(h && attacker) {
+            ApplyDamage(h);
         }
+    }
+
+    private void ApplyDamage(Health h) {
+        h.AddToHealth(amount);
+        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
