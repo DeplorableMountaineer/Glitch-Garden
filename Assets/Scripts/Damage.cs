@@ -1,16 +1,25 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Damage : MonoBehaviour {
     [SerializeField] private float amount = 50;
+    [SerializeField] private bool isDefenderProjectile = true;
 
     private void OnTriggerEnter2D(Collider2D other) {
+        if(other.isTrigger) {
+            return;
+        }
         Health h = other.gameObject.GetComponent<Health>();
-        Attacker attacker = other.gameObject.GetComponent<Attacker>();
-        if(h && attacker) {
-            ApplyDamage(h);
+        if(isDefenderProjectile) {
+            Attacker attacker = other.gameObject.GetComponent<Attacker>();
+            if(h && attacker) {
+                ApplyDamage(h);
+            }
+        }
+        else {
+            Defender defender = other.gameObject.GetComponent<Defender>();
+            if(h && defender) {
+                ApplyDamage(h);
+            }
         }
     }
 

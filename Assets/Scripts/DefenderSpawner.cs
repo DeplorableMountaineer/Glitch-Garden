@@ -8,6 +8,11 @@ public class DefenderSpawner : MonoBehaviour {
 
     private void OnMouseDown() {
         Vector2 position = GetSquareClicked();
+        foreach(Defender d in FindObjectsOfType<Defender>()) {
+            if(Vector2.Distance(d.transform.position, position) < 0.5f) {
+                return;
+            }
+        }
         SpawnDefender(position);
     }
 

@@ -13,18 +13,18 @@ public class AttackerSpawner : MonoBehaviour {
 
     IEnumerator Start() {
         yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
+        currentMinSpawnDelay = maxSpawnDelay;
         while(spawn) {
-            currentMinSpawnDelay = maxSpawnDelay;
             yield return new WaitForSeconds(Random.Range(currentMinSpawnDelay, maxSpawnDelay));
             SpawnAttacker();
             if(currentMinSpawnDelay > minSpawnDelay) {
-                currentMinSpawnDelay *= .95f;
+                currentMinSpawnDelay *= .8f;
                 if(currentMinSpawnDelay < minSpawnDelay) {
                     currentMinSpawnDelay = minSpawnDelay;
                 }
             }
             else if(maxSpawnDelay > minSpawnDelay) {
-                maxSpawnDelay *= .95f;
+                maxSpawnDelay *= .8f;
                 if(maxSpawnDelay < minSpawnDelay) {
                     maxSpawnDelay = minSpawnDelay;
                 }
@@ -33,6 +33,8 @@ public class AttackerSpawner : MonoBehaviour {
     }
 
     private void SpawnAttacker() {
-        Instantiate(attackerPrefab, transform.position, transform.rotation);
+        Attacker newAttacker = Instantiate<Attacker>(attackerPrefab,
+            transform.position, transform.rotation) as Attacker;
+        newAttacker.transform.parent = transform;
     }
 }
