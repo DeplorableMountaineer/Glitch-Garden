@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackerSpawner : MonoBehaviour {
     [SerializeField] private bool spawn = true;
     [SerializeField] private float minSpawnDelay = 1;
-    [SerializeField] private float maxSpawnDelay = 5;
+    [SerializeField] private float maxSpawnDelay = 10;
     [SerializeField] private Attacker attackerPrefab;
 
     private float currentMinSpawnDelay;
@@ -18,13 +18,13 @@ public class AttackerSpawner : MonoBehaviour {
             yield return new WaitForSeconds(Random.Range(currentMinSpawnDelay, maxSpawnDelay));
             SpawnAttacker();
             if(currentMinSpawnDelay > minSpawnDelay) {
-                currentMinSpawnDelay *= .8f;
+                currentMinSpawnDelay *= .65f;
                 if(currentMinSpawnDelay < minSpawnDelay) {
                     currentMinSpawnDelay = minSpawnDelay;
                 }
             }
             else if(maxSpawnDelay > minSpawnDelay) {
-                maxSpawnDelay *= .8f;
+                maxSpawnDelay *= .65f;
                 if(maxSpawnDelay < minSpawnDelay) {
                     maxSpawnDelay = minSpawnDelay;
                 }

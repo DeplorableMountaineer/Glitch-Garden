@@ -134,6 +134,7 @@ MonoBehaviour:
   deathEffect: {fileID: 619602477657418379, guid: 8cd2c469fcc141a4c87ec9ee3cb188aa,
     type: 3}
   offset: {x: -0.5119866, y: -0.2742789}
+  starValue: 100
 --- !u!70 &-6262110390107789089
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
